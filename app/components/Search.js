@@ -19,7 +19,7 @@ class Search extends React.Component{
   close() {
     this.setState({ showModal: false });
   }
-
+//comment
   open() {
     const api_key = `6cf70746523d3806298c3e8a3f27fe47`;
     const { movieName } = this.state;
