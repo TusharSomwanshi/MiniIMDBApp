@@ -13,7 +13,9 @@ class Navigation extends React.Component{
             </Navbar.Brand>
           </Navbar.Header>
             <Nav pullRight>
-              <NavItem eventKey={1} href="#">Developed by: Tushar Somwanshi</NavItem>
+              <NavItem eventKey={1} href="https://www.linkedin.com/in/tushar-somwanshi-6a96887b?trk=hp-identity-photo">
+              <b>Developed by:
+                Tushar Somwanshi</b></NavItem>
             </Nav>
         </Navbar>
       </div>

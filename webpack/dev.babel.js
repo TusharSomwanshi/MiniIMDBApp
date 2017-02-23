@@ -27,10 +27,11 @@ module.exports = {
     chunkFilename: '[name].chunk.js',
     publicPath: '/',
   },
+
   module: {
     rules: [{
         test: /\.js$/,
-        exclude: /node_modules/,  
+        exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
           presets: ['react-hmre'],
@@ -71,6 +72,14 @@ module.exports = {
       failOnError: false, // show a warning when there is a circular dependency
     }),
   ],
+  resolve: {
+    modules: ['app', 'node_modules'],
+    extensions: [
+      '.js',
+      '.jsx',
+      '.react.js',
+    ],
+  },  
   devtool: 'cheap-module-eval-source-map',
 };
 
