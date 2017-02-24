@@ -6,23 +6,53 @@ class UpcomingMovies extends React.Component{
     super(props);
     this.state = {
       result: {
-        results: []
+        results: [],
       },
-      error: false
+      error: false,
+      selectedMovie: false,
+      showModal: false
     }
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
     this.getUpcomingMovies = this.getUpcomingMovies.bind(this);
+    this.showMovieDetails = this.showMovieDetails.bind(this);
   }
 
   close() {
     this.setState({ showModal: false });
   }
 
-  open() {
-    this.setState({ showModal: true });
+  open(id) {
+    const movie = this.state.result.results.filter((el) => el.id === id)
+    this.setState({
+      showModal:true,
+      selectedMovie: movie[0]
+    })
   }
 
+  showMovieDetails(){
+    const { selectedMovie:movie } = this.state;
+    const src = movie.poster_path === null ? "https://placehold.it/300?text=image+not+avvailable":`https://image.tmdb.org/t/p/w185/${movie.poster_path}`
+    return(
+      <Modal show={this.state.showModal} onHide={this.close}>
+        <Modal.Header closeButton>
+          <Modal.Title>{movie.original_title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{textAlign:'center'}}>
+            <img style={{height:300,width:"50%"}} src={src}/>
+          <p style={{textAlign:'justify'}}><b>Overview: </b>{movie.overview}</p>
+          <p style={{textAlign:'justify'}}><b>Popularity: </b>{movie.popularity}</p>
+          <p style={{textAlign:'justify'}}><b>Vote Count: </b>{movie.vote_count}</p>
+          <p style={{textAlign:'justify'}}><b>Vote Average: </b>{movie.vote_average}</p>
+          <p style={{textAlign:'justify'}}><b>Release Date: </b>{movie.release_date}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.close}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    )
+
+  }
 
   getUpcomingMovies(){
     const api_key = `6cf70746523d3806298c3e8a3f27fe47`;
@@ -36,6 +66,7 @@ class UpcomingMovies extends React.Component{
   componentDidMount(){
      this.getUpcomingMovies();
   }
+
 
 
 
@@ -55,7 +86,7 @@ class UpcomingMovies extends React.Component{
                   <img style={{height:50,width:"100%"}} src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}/>
                 </Col>
                 <Col xs={6} md={4}>
-                  <p>{movie.title}</p>
+                  <p onClick={() => this.open(movie.id)}>{movie.title}</p>
                 </Col>
             </Row>
             </ListGroupItem>
@@ -63,6 +94,9 @@ class UpcomingMovies extends React.Component{
             </Thumbnail>
           </Col>
         </Row>
+        {
+          result.length === 0 ? '' : this.showMovieDetails()
+        }
       </div>
     )
   }

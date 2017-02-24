@@ -39,7 +39,7 @@ class Carousels extends React.Component{
                   this.state.result.results.map((movie,index) =>
                     <Carousel.Item key={index} style={{ textAlign: 'center' }}>
                       <img
-                        style={{ maxHeight: 300, display: 'inline' }}
+                        style={{ maxHeight: 300, display: 'inline',width: 400 }}
                         alt="200x200"
                         src={`https://image.tmdb.org/t/p/w600/${movie.poster_path}`}
                       />

@@ -52,6 +52,7 @@ class Search extends React.Component{
           <p style={{textAlign:'justify'}}><b>Popularity: </b>{movie.popularity}</p>
           <p style={{textAlign:'justify'}}><b>Vote Count: </b>{movie.vote_count}</p>
           <p style={{textAlign:'justify'}}><b>Vote Average: </b>{movie.vote_average}</p>
+          <p style={{textAlign:'justify'}}><b>Release Date: </b>{movie.release_date}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.close}>Close</Button>
@@ -70,7 +71,7 @@ class Search extends React.Component{
           this.state.result.map((movie,index) => {
             return(
               <p key={index} onClick={() => this.open(movie.id)}>
-                {index<5 ? `${movie.original_title}` : '' }
+                {index<5 ? `${movie.title}` : '' }
               </p>
             )
           }
